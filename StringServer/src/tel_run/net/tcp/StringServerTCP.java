@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 import tel_run.net.Defaults;
 import tel_run.net.IStringProtocol;
@@ -31,7 +32,15 @@ public class StringServerTCP extends StringServer {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		PrintStream writer = new PrintStream(socket.getOutputStream());
 		while(true){
-			String line = reader.readLine();
+			String line = null;
+			try
+			{
+				line = reader.readLine();
+			}
+			catch(SocketException ex)
+			{
+				break;
+			}
 			if (line == null)
 				break;
 			String responce = protocol.process(line);
