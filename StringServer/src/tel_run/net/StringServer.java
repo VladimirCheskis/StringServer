@@ -2,7 +2,7 @@ package tel_run.net;
 
 import java.io.IOException;
 
-public abstract class StringServer {
+public abstract class StringServer implements IStringServer {
 
 
 	protected IStringProtocol protocol;
@@ -12,6 +12,7 @@ public abstract class StringServer {
 		this.protocol = protocol;
 	}
 	
+	@Override
 	public void run() throws IOException
 	{
 		while(true)
@@ -21,6 +22,4 @@ public abstract class StringServer {
 	}
 	
 	protected abstract void receiveAndSend() throws IOException;
-
-	public abstract void close() throws IOException;
 }
