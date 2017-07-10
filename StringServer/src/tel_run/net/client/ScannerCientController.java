@@ -42,7 +42,8 @@ public class ScannerCientController implements IClientController{
 			}
 			catch(NoSuchElementException e){
 			}
-			
+			if (line == null)
+				break;
 			if (printRequests)
 				System.out.println(line);		
 			
