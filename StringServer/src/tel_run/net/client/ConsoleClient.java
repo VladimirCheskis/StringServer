@@ -7,5 +7,6 @@ import tel_run.net.IStringClient;
 public class ConsoleClient extends ScannerCientController{
 	public ConsoleClient(IStringClient stringClient) {
 		super(stringClient, new Scanner(System.in));
+		setPrintEnterLine(true);
 	}
 }

@@ -1,6 +1,7 @@
 package tel_run.net.client;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import tel_run.net.IStringClient;
@@ -9,7 +10,9 @@ import tel_run.net.Defaults;
 public class ScannerCientController implements IClientController{
 	IStringClient stringClient;
 	Scanner scanner;
+	
 	boolean printRequests = false;
+	boolean printEnterLine = false;	
 
 	public final boolean isPrintRequests() {
 		return printRequests;
@@ -30,10 +33,19 @@ public class ScannerCientController implements IClientController{
 	{
 		while(true)
 		{
-			System.out.println("Enter line or exit");
-			String line = scanner.nextLine();
+			if (printEnterLine)
+				System.out.println("Enter line or exit");
+			String line = null;
+			try
+			{
+				line = scanner.nextLine();
+			}
+			catch(NoSuchElementException e){
+			}
+			
 			if (printRequests)
-				System.out.println(line);			
+				System.out.println(line);		
+			
 			if (line.equals(Defaults.EXIT))
 				break;
 			if (line.startsWith(Defaults.REMARK_START))
@@ -43,6 +55,14 @@ public class ScannerCientController implements IClientController{
 		}
 	}
 	
+	public final boolean isPrintEnterLine() {
+		return printEnterLine;
+	}
+
+	public final void setPrintEnterLine(boolean printEnterLine) {
+		this.printEnterLine = printEnterLine;
+	}
+
 	@Override	
 	public void close() throws IOException
 	{
