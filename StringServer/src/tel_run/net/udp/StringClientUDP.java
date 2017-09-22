@@ -15,9 +15,8 @@ public class StringClientUDP implements IStringClient {
 
 	@Override
 	public String sendAndReseive(String request) throws IOException {
-		byte[] bytes = request.getBytes();
-		DatagramPacket spacket = new DatagramPacket(bytes, bytes.length, address, port);
-		socket.send(spacket);
+		
+		send(request);
 		
 		byte[] result = new byte[maxLength];
 		DatagramPacket rpacket = new DatagramPacket(result, maxLength);
@@ -25,6 +24,13 @@ public class StringClientUDP implements IStringClient {
 		String response = new String(Arrays.copyOf(result, rpacket.getLength()));	
 		return response;
 	}
+	
+	@Override
+	public void send(String request) throws IOException {
+		byte[] bytes = request.getBytes();
+		DatagramPacket spacket = new DatagramPacket(bytes, bytes.length, address, port);
+		socket.send(spacket);
+	}	
 
 	@Override
 	public void close() throws IOException {

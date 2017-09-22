@@ -33,11 +33,13 @@ public class StringServerUDP extends StringServer {
 		socket.receive(rpacket);
 		String request = new String(Arrays.copyOf(result, rpacket.getLength()));
 		String responce = protocol.process(request);
-		byte[] bytes = responce.getBytes();
-		DatagramPacket spacket = new DatagramPacket(bytes, bytes.length, 
-													rpacket.getAddress(), 
-													rpacket.getPort());
-		socket.send(spacket);
+		if (responce != null){
+			byte[] bytes = responce.getBytes();
+			DatagramPacket spacket = new DatagramPacket(bytes, bytes.length, 
+														rpacket.getAddress(), 
+														rpacket.getPort());
+			socket.send(spacket);
+		}
 	}
 	
 	DatagramSocket socket;

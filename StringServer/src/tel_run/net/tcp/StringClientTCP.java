@@ -17,6 +17,11 @@ public class StringClientTCP implements IStringClient {
 		writer.println(request);
 		return reader.readLine();
 	}
+	
+	@Override
+	public void send(String request) throws IOException {
+		writer.println(request);
+	}
 
 	static BufferedReader reader;
 	static PrintStream writer;	
@@ -43,5 +48,5 @@ public class StringClientTCP implements IStringClient {
 		socket.close();
 		reader = null;
 		writer = null;
-	}	
+	}
 }

@@ -44,7 +44,9 @@ public class StringServerTCP extends StringServer {
 			if (line == null)
 				break;
 			String responce = protocol.process(line);
-			writer.println(responce);
+			if (responce != null){
+				writer.println(responce);
+			}
 		}
 	}	
 	
