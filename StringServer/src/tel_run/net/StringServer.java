@@ -6,6 +6,7 @@ public abstract class StringServer implements IStringServer {
 
 
 	protected IStringProtocol protocol;
+	protected boolean isBreaked = false;
 
 	public StringServer(IStringProtocol protocol) {
 		super();
@@ -15,7 +16,8 @@ public abstract class StringServer implements IStringServer {
 	@Override
 	public void run() throws IOException
 	{
-		while(true)
+		isBreaked = false;
+		while(!isBreaked)
 		{
 			receiveAndSend();
 		}		

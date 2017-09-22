@@ -43,6 +43,9 @@ public class StringServerTCP extends StringServer {
 			}
 			if (line == null)
 				break;
+			if (line.equals(Defaults.EXIT)){
+				isBreaked = true;
+			}
 			String responce = protocol.process(line);
 			if (responce != null){
 				writer.println(responce);

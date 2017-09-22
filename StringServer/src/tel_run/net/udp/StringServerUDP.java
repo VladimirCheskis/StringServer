@@ -32,6 +32,9 @@ public class StringServerUDP extends StringServer {
 		DatagramPacket rpacket = new DatagramPacket(result, maxLength);
 		socket.receive(rpacket);
 		String request = new String(Arrays.copyOf(result, rpacket.getLength()));
+		if (request != null && request.equals(Defaults.EXIT)){
+			isBreaked = true;
+		}		
 		String responce = protocol.process(request);
 		if (responce != null){
 			byte[] bytes = responce.getBytes();
